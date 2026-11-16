@@ -1,6 +1,7 @@
 from typing import Any, Protocol
 
 import psycopg
+from psycopg import sql
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
@@ -10,22 +11,24 @@ class DocumentRepo(Protocol):
 
 
 class PgVectorRepo:
-    def __init__(self, dsn: str) -> None:
+    def __init__(self, dsn: str, table: str = "documents") -> None:
         self.dsn = dsn
+        self.table = table
 
     def search(self, vector: list[float], top_k: int = 5) -> list[dict[str, Any]]:
         vec = "[" + ",".join(str(value) for value in vector) + "]"
+        table = sql.Identifier(self.table)
+        query = sql.SQL(
+            """
+            SELECT id, content, metadata,
+                   1 - (embedding <=> %s::vector) AS score
+            FROM {}
+            ORDER BY embedding <=> %s::vector
+            LIMIT %s
+            """
+        ).format(table)
         with psycopg.connect(self.dsn, row_factory=dict_row) as conn, conn.cursor() as cur:
-            cur.execute(
-                """
-                SELECT id, content, metadata,
-                       1 - (embedding <=> %s::vector) AS score
-                FROM documents
-                ORDER BY embedding <=> %s::vector
-                LIMIT %s
-                """,
-                (vec, vec, top_k),
-            )
+            cur.execute(query, (vec, vec, top_k))
             return [
                 {
                     "id": row["id"],

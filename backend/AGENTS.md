@@ -5,18 +5,18 @@ Python 3.12 + FastAPI + LangGraph + PostgreSQL/pgvector。
 ## 常用命令
 
 ```bash
-# 安装依赖（uv 管理 Python 3.12）
-uv sync
+# 安装依赖（uv 管理 Python 3.12，含 dev 工具）
+uv sync --extra dev
 
 # 启动开发服务
 uv run uvicorn app.main:app --reload --port 8000
 
-# 质量门禁
-ruff check .
-pytest -q
+# 质量门禁（与 CI 一致）
+uv run --extra dev ruff check .
+uv run --extra dev pytest -q
 
 # 建表 + 灌占位数据（需要 postgres 已启动）
-python -m scripts.seed
+uv run python -m scripts.seed
 ```
 
 ## 目录边界

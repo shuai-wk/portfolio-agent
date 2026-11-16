@@ -1,0 +1,30 @@
+{"question": "你的职业定位是什么？", "expected_source_ids": ["intro"]}
+{"question": "你有多少年工作经验？", "expected_source_ids": ["intro"]}
+{"question": "你希望找什么方向的工作？", "expected_source_ids": ["intro"]}
+{"question": "你在第一家公司负责什么系统？", "expected_source_ids": ["exp_a"]}
+{"question": "你做过后端数据库优化吗？", "expected_source_ids": ["exp_a"]}
+{"question": "你处理过高并发请求吗？", "expected_source_ids": ["exp_a"]}
+{"question": "你在创业公司做全栈吗？", "expected_source_ids": ["exp_b"]}
+{"question": "你部署过生产环境吗？", "expected_source_ids": ["exp_b"]}
+{"question": "你用 Docker 和 Kubernetes 吗？", "expected_source_ids": ["exp_b"]}
+{"question": "RAG 项目用什么框架编排？", "expected_source_ids": ["proj_rag"]}
+{"question": "RAG 项目检索用 pgvector 吗？", "expected_source_ids": ["proj_rag"]}
+{"question": "RAG 项目怎么接入可观测性？", "expected_source_ids": ["proj_rag"]}
+{"question": "RAG 项目支持流式输出吗？", "expected_source_ids": ["proj_rag"]}
+{"question": "实时管道用什么消息队列？", "expected_source_ids": ["proj_realtime"]}
+{"question": "实时项目用什么做计算引擎？", "expected_source_ids": ["proj_realtime"]}
+{"question": "实时结果存到哪里？", "expected_source_ids": ["proj_realtime"]}
+{"question": "实时管道怎么保证稳定性？", "expected_source_ids": ["proj_realtime"]}
+{"question": "电商项目你负责订单还是库存？", "expected_source_ids": ["proj_ecom"]}
+{"question": "电商项目怎么避免超卖？", "expected_source_ids": ["proj_ecom"]}
+{"question": "电商支付回调怎么保证幂等？", "expected_source_ids": ["proj_ecom"]}
+{"question": "你熟悉哪些编程语言？", "expected_source_ids": ["skills"]}
+{"question": "你熟悉向量数据库吗？", "expected_source_ids": ["skills"]}
+{"question": "你熟悉 LangGraph 吗？", "expected_source_ids": ["skills"]}
+{"question": "你熟悉 Kubernetes 吗？", "expected_source_ids": ["skills"]}
+{"question": "你是什么专业毕业的？", "expected_source_ids": ["education"]}
+{"question": "你的最高学历是什么？", "expected_source_ids": ["education"]}
+{"question": "你拿过什么奖？", "expected_source_ids": ["awards"]}
+{"question": "你参加过什么竞赛？", "expected_source_ids": ["awards"]}
+{"question": "你有开源项目吗？", "expected_source_ids": ["oss"]}
+{"question": "你写技术博客吗？", "expected_source_ids": ["oss"]}

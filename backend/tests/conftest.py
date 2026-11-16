@@ -34,6 +34,11 @@ class FakeLLM:
         self.calls.append(prompt)
         return "mock answer"
 
+    def stream(self, prompt: str) -> Iterator[str]:
+        self.calls.append(prompt)
+        yield "mock"
+        yield " answer"
+
 
 class FakeGeneration:
     def __init__(self, name: str, input: dict) -> None:
@@ -75,12 +80,16 @@ def fake_repo() -> FakeRepo:
 
 
 @pytest.fixture
-def fake_agent(fake_repo: FakeRepo, fake_tracer: FakeTracer) -> Agent:
-    return Agent(
-        embedder=FakeEmbedder(),
-        repo=fake_repo,
-        llm=LangfuseLLM(FakeLLM(), fake_tracer),
-    )
+def make_agent(fake_repo: FakeRepo, fake_tracer: FakeTracer):
+    def _make(llm) -> Agent:
+        return Agent(embedder=FakeEmbedder(), repo=fake_repo, llm=llm)
+
+    return _make
+
+
+@pytest.fixture
+def fake_agent(make_agent, fake_tracer: FakeTracer) -> Agent:
+    return make_agent(LangfuseLLM(FakeLLM(), fake_tracer))
 
 
 @pytest.fixture

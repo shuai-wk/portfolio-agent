@@ -1,0 +1,116 @@
+{
+  "sample_size": 10,
+  "avg_faithfulness": 0.2882707041211534,
+  "items": [
+    {
+      "question": "你熟悉哪些编程语言？",
+      "answer": "基于我的资料，对「你熟悉哪些编程语言？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "exp_a",
+        "proj_rag",
+        "oss"
+      ],
+      "faithfulness": 0.21052631578947367,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你在第一家公司负责什么系统？",
+      "answer": "基于我的资料，对「你在第一家公司负责什么系统？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "exp_a",
+        "proj_rag",
+        "proj_realtime"
+      ],
+      "faithfulness": 0.3333333333333333,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你的职业定位是什么？",
+      "answer": "基于我的资料，对「你的职业定位是什么？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "oss",
+        "exp_a",
+        "proj_realtime"
+      ],
+      "faithfulness": 0.10526315789473684,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你熟悉 Kubernetes 吗？",
+      "answer": "基于我的资料，对「你熟悉 Kubernetes 吗？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "skills",
+        "exp_b",
+        "oss"
+      ],
+      "faithfulness": 0.35555555555555557,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你用 Docker 和 Kubernetes 吗？",
+      "answer": "基于我的资料，对「你用 Docker 和 Kubernetes 吗？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "skills",
+        "exp_b",
+        "proj_rag"
+      ],
+      "faithfulness": 0.5192307692307693,
+      "verdict": "partial"
+    },
+    {
+      "question": "你部署过生产环境吗？",
+      "answer": "基于我的资料，对「你部署过生产环境吗？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "proj_rag",
+        "exp_b",
+        "intro"
+      ],
+      "faithfulness": 0.2894736842105263,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你是什么专业毕业的？",
+      "answer": "基于我的资料，对「你是什么专业毕业的？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "proj_rag",
+        "oss",
+        "intro"
+      ],
+      "faithfulness": 0.21052631578947367,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你做过后端数据库优化吗？",
+      "answer": "基于我的资料，对「你做过后端数据库优化吗？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "oss",
+        "proj_rag",
+        "exp_a"
+      ],
+      "faithfulness": 0.325,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "你有开源项目吗？",
+      "answer": "基于我的资料，对「你有开源项目吗？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "education",
+        "proj_rag",
+        "oss"
+      ],
+      "faithfulness": 0.3142857142857143,
+      "verdict": "not_faithful"
+    },
+    {
+      "question": "电商项目你负责订单还是库存？",
+      "answer": "基于我的资料，对「电商项目你负责订单还是库存？」的回答是：可以参考我的项目经历与技术栈。",
+      "retrieved_source_ids": [
+        "proj_ecom",
+        "oss",
+        "proj_realtime"
+      ],
+      "faithfulness": 0.21951219512195122,
+      "verdict": "not_faithful"
+    }
+  ]
+}

@@ -1,4 +1,8 @@
+import json
+from collections.abc import Iterator
+
 from fastapi import Depends, FastAPI
+from fastapi.responses import StreamingResponse
 
 from .agent import Agent
 from .config import Settings, get_settings
@@ -43,4 +47,26 @@ def ask(request: AskRequest, agent: Agent = Depends(get_agent)) -> AskResponse:
     return AskResponse(
         answer=result["answer"],
         sources=[Source(**source) for source in result["sources"]],
+    )
+
+
+def _sse(event: str, data: dict) -> str:
+    return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n"
+
+
+def _stream_events(agent: Agent, question: str) -> Iterator[str]:
+    for event, data in agent.stream(question):
+        yield _sse(event, data)
+
+
+@app.post("/api/ask/stream")
+def ask_stream(request: AskRequest, agent: Agent = Depends(get_agent)) -> StreamingResponse:
+    return StreamingResponse(
+        _stream_events(agent, request.question),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
+        },
     )

@@ -1,0 +1,487 @@
+{
+  "num_questions": 30,
+  "hit_at_1": 0.43333333333333335,
+  "hit_at_3": 0.8,
+  "recall_at_5": 0.8666666666666667,
+  "mrr": 0.611111111111111,
+  "details": [
+    {
+      "question": "你的职业定位是什么？",
+      "expected_source_ids": [
+        "intro"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "proj_realtime",
+        "oss",
+        "exp_a"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "recall_at_5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "question": "你有多少年工作经验？",
+      "expected_source_ids": [
+        "intro"
+      ],
+      "retrieved_source_ids": [
+        "intro",
+        "exp_b",
+        "proj_rag",
+        "exp_a",
+        "oss"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "你希望找什么方向的工作？",
+      "expected_source_ids": [
+        "intro"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "proj_realtime",
+        "intro"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "question": "你在第一家公司负责什么系统？",
+      "expected_source_ids": [
+        "exp_a"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "exp_a",
+        "proj_realtime"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "你做过后端数据库优化吗？",
+      "expected_source_ids": [
+        "exp_a"
+      ],
+      "retrieved_source_ids": [
+        "oss",
+        "proj_rag",
+        "exp_a",
+        "awards"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "question": "你处理过高并发请求吗？",
+      "expected_source_ids": [
+        "exp_a"
+      ],
+      "retrieved_source_ids": [
+        "proj_realtime",
+        "proj_rag",
+        "exp_a"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "question": "你在创业公司做全栈吗？",
+      "expected_source_ids": [
+        "exp_b"
+      ],
+      "retrieved_source_ids": [
+        "exp_b",
+        "proj_rag",
+        "education"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "你部署过生产环境吗？",
+      "expected_source_ids": [
+        "exp_b"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "exp_b",
+        "proj_realtime",
+        "intro",
+        "oss"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "你用 Docker 和 Kubernetes 吗？",
+      "expected_source_ids": [
+        "exp_b"
+      ],
+      "retrieved_source_ids": [
+        "skills",
+        "exp_b",
+        "proj_rag"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "RAG 项目用什么框架编排？",
+      "expected_source_ids": [
+        "proj_rag"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "proj_realtime",
+        "exp_a"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "RAG 项目检索用 pgvector 吗？",
+      "expected_source_ids": [
+        "proj_rag"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "awards",
+        "skills",
+        "proj_realtime"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "RAG 项目怎么接入可观测性？",
+      "expected_source_ids": [
+        "proj_rag"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "education",
+        "proj_realtime",
+        "awards"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "RAG 项目支持流式输出吗？",
+      "expected_source_ids": [
+        "proj_rag"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "proj_realtime"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "实时管道用什么消息队列？",
+      "expected_source_ids": [
+        "proj_realtime"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "proj_realtime"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "实时项目用什么做计算引擎？",
+      "expected_source_ids": [
+        "proj_realtime"
+      ],
+      "retrieved_source_ids": [
+        "proj_realtime",
+        "proj_rag",
+        "education",
+        "awards"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "实时结果存到哪里？",
+      "expected_source_ids": [
+        "proj_realtime"
+      ],
+      "retrieved_source_ids": [
+        "exp_a",
+        "proj_rag",
+        "exp_b",
+        "proj_realtime",
+        "skills"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "recall_at_5": 1.0,
+      "mrr": 0.25
+    },
+    {
+      "question": "实时管道怎么保证稳定性？",
+      "expected_source_ids": [
+        "proj_realtime"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "awards",
+        "exp_a"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "recall_at_5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "question": "电商项目你负责订单还是库存？",
+      "expected_source_ids": [
+        "proj_ecom"
+      ],
+      "retrieved_source_ids": [
+        "proj_ecom",
+        "oss",
+        "proj_realtime",
+        "exp_a",
+        "awards"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "电商项目怎么避免超卖？",
+      "expected_source_ids": [
+        "proj_ecom"
+      ],
+      "retrieved_source_ids": [
+        "proj_ecom",
+        "exp_b",
+        "proj_realtime",
+        "exp_a",
+        "proj_rag"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "电商支付回调怎么保证幂等？",
+      "expected_source_ids": [
+        "proj_ecom"
+      ],
+      "retrieved_source_ids": [
+        "proj_ecom",
+        "proj_rag",
+        "proj_realtime",
+        "skills",
+        "education"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "你熟悉哪些编程语言？",
+      "expected_source_ids": [
+        "skills"
+      ],
+      "retrieved_source_ids": [
+        "proj_realtime",
+        "proj_rag",
+        "exp_a"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "recall_at_5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "question": "你熟悉向量数据库吗？",
+      "expected_source_ids": [
+        "skills"
+      ],
+      "retrieved_source_ids": [
+        "intro",
+        "skills",
+        "proj_realtime",
+        "oss",
+        "education"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "你熟悉 LangGraph 吗？",
+      "expected_source_ids": [
+        "skills"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "skills",
+        "oss",
+        "intro",
+        "exp_a"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "你熟悉 Kubernetes 吗？",
+      "expected_source_ids": [
+        "skills"
+      ],
+      "retrieved_source_ids": [
+        "skills",
+        "exp_b",
+        "oss",
+        "proj_rag",
+        "proj_realtime"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "你是什么专业毕业的？",
+      "expected_source_ids": [
+        "education"
+      ],
+      "retrieved_source_ids": [
+        "proj_rag",
+        "oss",
+        "intro",
+        "exp_a"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "recall_at_5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "question": "你的最高学历是什么？",
+      "expected_source_ids": [
+        "education"
+      ],
+      "retrieved_source_ids": [
+        "proj_realtime",
+        "education",
+        "proj_rag"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.5
+    },
+    {
+      "question": "你拿过什么奖？",
+      "expected_source_ids": [
+        "awards"
+      ],
+      "retrieved_source_ids": [
+        "awards",
+        "proj_rag",
+        "skills",
+        "proj_realtime"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "question": "你参加过什么竞赛？",
+      "expected_source_ids": [
+        "awards"
+      ],
+      "retrieved_source_ids": [
+        "proj_realtime",
+        "proj_rag",
+        "awards",
+        "oss"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 0.3333333333333333
+    },
+    {
+      "question": "你有开源项目吗？",
+      "expected_source_ids": [
+        "oss"
+      ],
+      "retrieved_source_ids": [
+        "education",
+        "proj_realtime",
+        "proj_rag",
+        "oss",
+        "intro"
+      ],
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "recall_at_5": 1.0,
+      "mrr": 0.25
+    },
+    {
+      "question": "你写技术博客吗？",
+      "expected_source_ids": [
+        "oss"
+      ],
+      "retrieved_source_ids": [
+        "oss",
+        "intro",
+        "proj_realtime",
+        "education",
+        "skills"
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "recall_at_5": 1.0,
+      "mrr": 1.0
+    }
+  ]
+}

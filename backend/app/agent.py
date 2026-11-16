@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from typing import Any, TypedDict
 
 from langgraph.graph import END, START, StateGraph
@@ -27,7 +28,36 @@ class Agent:
         docs = self.repo.search(vector, top_k=5)
         prompt = self._build_prompt(question, docs)
         answer = self.llm.invoke(prompt)
-        sources = [
+        sources = self._to_sources(docs)
+        return {"retrieved": docs, "answer": answer, "sources": sources}
+
+    def stream(self, question: str) -> Iterator[tuple[str, dict[str, Any]]]:
+        try:
+            yield ("step", {"step": "embedding", "message": "正在编码问题"})
+            vector = self.embedder.embed(question)
+            yield ("step", {"step": "retrieval", "message": "正在检索相关资料"})
+            docs = self.repo.search(vector, top_k=5)
+            sources = self._to_sources(docs)
+            yield ("sources", {"sources": sources})
+            yield ("step", {"step": "generation", "message": "正在生成回答"})
+            prompt = self._build_prompt(question, docs)
+            chunks: list[str] = []
+            for token in self.llm.stream(prompt):
+                chunks.append(token)
+                yield ("token", {"token": token})
+            answer = "".join(chunks)
+            yield ("done", {"answer": answer, "sources": sources})
+        except Exception as exc:
+            yield ("error", {"error": str(exc)})
+
+    @staticmethod
+    def _build_prompt(question: str, docs: list[dict[str, Any]]) -> str:
+        contexts = "\n\n".join(f"[{index}] {doc['content']}" for index, doc in enumerate(docs, 1))
+        return f"Question: {question}\nContexts:\n{contexts}"
+
+    @staticmethod
+    def _to_sources(docs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        return [
             {
                 "id": doc["id"],
                 "content": doc["content"],
@@ -36,12 +66,6 @@ class Agent:
             }
             for doc in docs
         ]
-        return {"retrieved": docs, "answer": answer, "sources": sources}
-
-    @staticmethod
-    def _build_prompt(question: str, docs: list[dict[str, Any]]) -> str:
-        contexts = "\n\n".join(f"[{index}] {doc['content']}" for index, doc in enumerate(docs, 1))
-        return f"Question: {question}\nContexts:\n{contexts}"
 
     def _build(self) -> Any:
         graph = StateGraph(AgentState)
