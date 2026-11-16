@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     llm_base_url: str = "https://api.openai.com/v1"
     llm_api_key: str = ""
     llm_model: str = ""
+    llm_max_tokens: int = 1024
     embedding_base_url: str = "https://api.openai.com/v1"
     embedding_api_key: str = ""
     embedding_model: str = ""

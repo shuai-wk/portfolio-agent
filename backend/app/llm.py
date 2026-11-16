@@ -31,14 +31,16 @@ class MockLLM:
 
 
 class OpenAICompatibleLLM:
-    def __init__(self, base_url: str, api_key: str, model: str) -> None:
+    def __init__(self, base_url: str, api_key: str, model: str, max_tokens: int = 1024) -> None:
         self.client = OpenAI(base_url=base_url, api_key=api_key)
         self.model = model
+        self.max_tokens = max_tokens
 
     def invoke(self, prompt: str) -> str:
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
+            max_tokens=self.max_tokens,
         )
         return response.choices[0].message.content or ""
 
@@ -46,6 +48,7 @@ class OpenAICompatibleLLM:
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
+            max_tokens=self.max_tokens,
             stream=True,
         )
         for chunk in response:
@@ -107,6 +110,7 @@ def build_llm(settings: Settings) -> LLM:
             settings.llm_base_url,
             settings.llm_api_key,
             settings.llm_model,
+            settings.llm_max_tokens,
         )
     return MockLLM()
 

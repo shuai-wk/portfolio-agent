@@ -60,6 +60,18 @@ EMBEDDING_MODEL=text-embedding-3-small
 docker compose run --rm backend python -m scripts.seed
 ```
 
+DeepSeek 目前只有对话模型、没有 embedding 接口。只填 `LLM_*` 时，后端会自动使用本地词法 embedding（256 维），不需要第二个 key；如果想要更好的语义检索，再补 `EMBEDDING_*`。DeepSeek 示例：
+
+```bash
+LLM_BASE_URL=https://api.deepseek.com
+LLM_API_KEY=sk-...
+LLM_MODEL=deepseek-flash
+LLM_MAX_TOKENS=1024
+EMBEDDING_BASE_URL=
+EMBEDDING_API_KEY=
+EMBEDDING_MODEL=
+```
+
 密钥只放在 `.env` 或服务器环境变量里，`.env` 已被 gitignore。
 
 ## 技术选型说明
