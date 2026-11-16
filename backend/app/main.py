@@ -7,17 +7,17 @@ from fastapi.responses import StreamingResponse
 from .agent import Agent
 from .config import Settings, get_settings
 from .db import DocumentRepo, PgVectorRepo
-from .embeddings import Embedder, MockEmbedder
-from .llm import LangfuseLLM, MockLLM, build_langfuse
+from .embeddings import build_embedder
+from .llm import LangfuseLLM, build_langfuse, build_llm
 from .schemas import AskRequest, AskResponse, Source
 
 app = FastAPI(title="portfolio-agent backend")
 
 
 def build_agent(settings: Settings) -> Agent:
-    embedder: Embedder = MockEmbedder(settings.embedding_dim)
+    embedder = build_embedder(settings)
     repo: DocumentRepo = PgVectorRepo(settings.database_url)
-    llm = LangfuseLLM(MockLLM(), build_langfuse(settings))
+    llm = LangfuseLLM(build_llm(settings), build_langfuse(settings))
     return Agent(embedder=embedder, repo=repo, llm=llm)
 
 

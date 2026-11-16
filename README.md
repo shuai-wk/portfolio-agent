@@ -41,6 +41,27 @@ docker compose run --rm backend python -m scripts.seed
 
 部署时把 `data/` 挂载到服务器的 `/data`（compose 已设置 `DATA_DIR=/data`）。访客访问的是你部署的实例，数据始终在你这侧，不会进入 GitHub。`eval/corpus/` 是合成评测样例，不含个人数据。
 
+## 接入真实模型
+
+后端通过 OpenAI-compatible 接口调用 LLM 和 embedding；未配置 key 时自动回退到 mock，方便本地跑通。在 `.env` 中填入：
+
+```bash
+LLM_BASE_URL=https://api.openai.com/v1
+LLM_API_KEY=sk-...
+LLM_MODEL=gpt-4o-mini
+EMBEDDING_BASE_URL=https://api.openai.com/v1
+EMBEDDING_API_KEY=sk-...
+EMBEDDING_MODEL=text-embedding-3-small
+```
+
+也可以换成 DashScope、智谱、DeepSeek 或本地 Ollama 等兼容接口，只要 `*_BASE_URL` 和模型名对应即可。改完 embedding 后重建索引，让新的向量维度生效：
+
+```bash
+docker compose run --rm backend python -m scripts.seed
+```
+
+密钥只放在 `.env` 或服务器环境变量里，`.env` 已被 gitignore。
+
 ## 技术选型说明
 
 ### 为什么用 pgvector 而不是专用向量数据库

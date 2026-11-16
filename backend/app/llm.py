@@ -2,6 +2,7 @@ from collections.abc import Iterator
 from typing import Any, Protocol
 
 from langfuse import Langfuse
+from openai import OpenAI
 
 from .config import Settings
 
@@ -27,6 +28,30 @@ class MockLLM:
         answer = self._answer(prompt)
         for index in range(0, len(answer), 2):
             yield answer[index : index + 2]
+
+
+class OpenAICompatibleLLM:
+    def __init__(self, base_url: str, api_key: str, model: str) -> None:
+        self.client = OpenAI(base_url=base_url, api_key=api_key)
+        self.model = model
+
+    def invoke(self, prompt: str) -> str:
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        return response.choices[0].message.content or ""
+
+    def stream(self, prompt: str) -> Iterator[str]:
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            stream=True,
+        )
+        for chunk in response:
+            delta = chunk.choices[0].delta.content
+            if delta:
+                yield delta
 
 
 class LangfuseLLM:
@@ -74,4 +99,14 @@ def build_langfuse(settings: Settings) -> Langfuse | None:
     if settings.langfuse_host:
         kwargs["host"] = settings.langfuse_host
     return Langfuse(**kwargs)
+
+
+def build_llm(settings: Settings) -> LLM:
+    if settings.llm_api_key and settings.llm_model:
+        return OpenAICompatibleLLM(
+            settings.llm_base_url,
+            settings.llm_api_key,
+            settings.llm_model,
+        )
+    return MockLLM()
 

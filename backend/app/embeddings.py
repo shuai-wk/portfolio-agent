@@ -1,5 +1,9 @@
 from typing import Protocol
 
+from openai import OpenAI
+
+from .config import Settings
+
 
 class Embedder(Protocol):
     def embed(self, text: str) -> list[float]: ...
@@ -15,4 +19,24 @@ class MockEmbedder:
             vector[index % self.dim] += ord(char) / 255.0
         norm = max(1.0, sum(value * value for value in vector) ** 0.5)
         return [round(value / norm, 6) for value in vector]
+
+
+class OpenAICompatibleEmbedder:
+    def __init__(self, base_url: str, api_key: str, model: str) -> None:
+        self.client = OpenAI(base_url=base_url, api_key=api_key)
+        self.model = model
+
+    def embed(self, text: str) -> list[float]:
+        response = self.client.embeddings.create(model=self.model, input=text)
+        return [float(value) for value in response.data[0].embedding]
+
+
+def build_embedder(settings: Settings) -> Embedder:
+    if settings.embedding_api_key and settings.embedding_model:
+        return OpenAICompatibleEmbedder(
+            settings.embedding_base_url,
+            settings.embedding_api_key,
+            settings.embedding_model,
+        )
+    return MockEmbedder(settings.embedding_dim)
 

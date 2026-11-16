@@ -10,6 +10,7 @@ dependencies = [
     "pydantic-settings>=2.6,<3",
     "langgraph>=0.2,<1",
     "langfuse>=2.53,<3",
+    "openai>=1.50,<3",
     "psycopg[binary]>=3.2,<4",
 ]
 

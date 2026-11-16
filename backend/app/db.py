@@ -40,9 +40,11 @@ class PgVectorRepo:
             ]
 
 
-def ensure_schema(dsn: str, dim: int) -> None:
+def ensure_schema(dsn: str, dim: int, recreate: bool = False) -> None:
     with psycopg.connect(dsn) as conn, conn.cursor() as cur:
         cur.execute("CREATE EXTENSION IF NOT EXISTS vector")
+        if recreate:
+            cur.execute("DROP TABLE IF EXISTS documents")
         cur.execute(
             f"""
             CREATE TABLE IF NOT EXISTS documents (
