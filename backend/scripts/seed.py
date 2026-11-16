@@ -1,4 +1,5 @@
 import os
+import re
 from pathlib import Path
 
 from app.config import get_settings
@@ -7,6 +8,19 @@ from app.embeddings import build_embedder
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATA_DIR = REPO_ROOT / "data"
+
+
+def chunk_markdown(text: str) -> list[str]:
+    parts = re.split(r"(?m)^(#{1,3} .*)$", text)
+    sections: list[str] = []
+    if parts[0].strip():
+        sections.append(parts[0].strip())
+    for index in range(1, len(parts), 2):
+        heading = parts[index].strip()
+        body = parts[index + 1].strip() if index + 1 < len(parts) else ""
+        if body:
+            sections.append(f"{heading}\n{body}".strip())
+    return [section for section in sections if section]
 
 
 def load_documents(data_dir: Path) -> list[dict]:
@@ -31,14 +45,17 @@ def main() -> None:
             "Copy data.example to data and add your own content."
         )
     embedder = build_embedder(settings)
-    rows = [
-        {
-            "content": document["content"],
-            "embedding": embedder.embed(document["content"]),
-            "metadata": document["metadata"],
-        }
-        for document in documents
-    ]
+    rows: list[dict] = []
+    for document in documents:
+        source = document["metadata"]["source"]
+        for chunk_index, chunk in enumerate(chunk_markdown(document["content"])):
+            rows.append(
+                {
+                    "content": chunk,
+                    "embedding": embedder.embed(chunk),
+                    "metadata": {"source": source, "chunk": chunk_index},
+                }
+            )
     dim = len(rows[0]["embedding"])
     ensure_schema(settings.database_url, dim, recreate=True)
     insert_documents(settings.database_url, rows)
